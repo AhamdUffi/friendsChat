@@ -1,0 +1,18 @@
+.chat_profile img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.chat_profile .chatField {
+  overflow: hidden;
+  height: 100px;
+  max-width: 200px;
+}
+.chat_profile p {
+  font-size: 12px;
+}
+@media screen and (max-width: 576px) {
+  .chat_profile p {
+    font-size: 12px;
+  }
+}

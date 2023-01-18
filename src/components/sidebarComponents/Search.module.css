@@ -1,0 +1,35 @@
+.search {
+  width: 100%;
+  overflow: hidden;
+  min-height: 70px;
+  max-height: 120px;
+}
+
+/* .finding {
+  width: 200px;
+} */
+
+.finding input {
+  background-color: transparent;
+  color: white;
+  padding: 12px;
+}
+.finding input:focus {
+  background-color: transparent;
+  color: white;
+}
+.submit {
+  background-color: transparent;
+}
+
+.result {
+  width: 300px;
+  display: flex;
+  overflow: hidden;
+  overflow-x: scroll;
+  margin-top: -20px;
+}
+
+.result::-webkit-scrollbar {
+  display: none;
+}

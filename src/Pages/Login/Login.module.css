@@ -1,0 +1,81 @@
+.login_container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: wheat;
+  background-image: url(../../assets/bgRegister.jpg);
+  background-position: center;
+  background-size: cover;
+}
+
+.login {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  width: 430px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 12px;
+  padding: 30px;
+  backdrop-filter: blur(1px);
+}
+
+.judul {
+  width: 100%;
+  margin-top: 12px;
+  text-transform: capitalize;
+  border-bottom: 4px solid purple;
+  text-align: center;
+  padding: 5px;
+}
+
+form {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+input {
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid purple;
+  background-color: transparent;
+  margin-top: 45px;
+  color: white;
+  font-size: 18px;
+}
+
+input::placeholder {
+  font-size: 14px;
+}
+
+input:focus {
+  outline: none;
+}
+
+input[type="file"] {
+  border: none;
+}
+
+label {
+  margin-top: 15px;
+}
+
+.submit {
+  border: none;
+  width: 140px;
+  height: 35px;
+  border-radius: 20px;
+  background-color: blueviolet;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-top: 12px;
+}

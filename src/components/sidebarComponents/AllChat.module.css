@@ -1,0 +1,11 @@
+.allChat {
+  height: 100%;
+  overflow: scroll;
+}
+
+@media (max-width: 576px) {
+  .allChat {
+    display: flex;
+    overflow-y: hidden;
+  }
+}

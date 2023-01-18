@@ -1,0 +1,15 @@
+.sidebar {
+  height: 100%;
+  border-radius: 12px 0 0 0;
+  overflow: hidden;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 576px) {
+  .sidebar {
+    height: 40%;
+    border-radius: 12px 12px 0 0;
+  }
+}

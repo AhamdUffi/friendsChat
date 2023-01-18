@@ -1,0 +1,10 @@
+.massage {
+  height: calc(100% - 140px);
+  margin-bottom: 10px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.massage::-webkit-scrollbar {
+  display: none;
+}

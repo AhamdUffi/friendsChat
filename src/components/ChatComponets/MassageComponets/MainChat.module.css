@@ -1,0 +1,65 @@
+.mainChat {
+  display: flex;
+  gap: 20px;
+  padding: 10px;
+  margin-top: 2px;
+}
+
+.mainChat .profil img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.mainChat .chatInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.mainChat .chatInfo img {
+  width: 300px;
+  height: 400px;
+  margin-bottom: 10px;
+}
+
+.mainChat .chatInfo span {
+  font-size: 12px;
+  font-weight: lighter;
+}
+
+.mainChat .chatInfo p {
+  background-color: white;
+  padding: 10px;
+  border-radius: 0 12px 12px 12px;
+}
+
+/* owner style */
+
+.owner {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 20px;
+  padding: 10px;
+  margin-top: 2px;
+}
+
+.owner .chatInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.owner .chatInfo p {
+  background-color: rgb(90, 224, 33);
+  padding: 10px;
+  border-radius: 12px 0 12px 12px;
+}
+
+@media screen and (max-width: 768px) {
+  .mainChat .chatInfo img {
+    width: 150px;
+    height: 200px;
+    margin-bottom: 10px;
+  }
+}
