@@ -8,19 +8,17 @@ function Search({ style }) {
       <div className={`d-flex ${styles.finding}`}>
         <input
           type="text"
-          className={` mt-0 rounded-0 border-0`}
-          placeholder="find my friend"
+          className={` mt-0 rounded-0 border-0 p-1`}
+          placeholder="Find My Friend"
         />
         <button className={`border-0 ${styles.submit} p-3`}>
           <i class="bi bi-search"></i>
         </button>
       </div>
       <div className={`${styles.result}`}>
+        {/* <ChatProfile />
         <ChatProfile />
-        <ChatProfile />
-        <ChatProfile />
-        <ChatProfile />
-        <ChatProfile />
+        <ChatProfile /> */}
       </div>
     </div>
   );

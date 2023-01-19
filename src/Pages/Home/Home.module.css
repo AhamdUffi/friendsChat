@@ -14,3 +14,11 @@
   -webkit-backdrop-filter: blur(1px);
   border-radius: 12px;
 }
+
+.sidebar {
+  flex: 1;
+}
+
+.chat {
+  flex: 2;
+}

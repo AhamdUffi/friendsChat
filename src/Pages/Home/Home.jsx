@@ -8,7 +8,7 @@ const Home = () => {
     <div
       className={`${styles.home} d-flex justify-content-center align-items-center`}
     >
-      <div className={`${styles.container} d-flex p-l flex-column flex-md-row`}>
+      <div className={`${styles.container} d-flex p-l flex-column flex-sm-row`}>
         <Sidebar style={`${styles.sidebar} `} />
         <Chat style={`${styles.chat} `} />
       </div>

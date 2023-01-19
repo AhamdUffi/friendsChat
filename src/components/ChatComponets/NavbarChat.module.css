@@ -18,5 +18,6 @@
 @media screen and (max-width: 576px) {
   .navbar_chat {
     border-radius: 0;
+    height: 50px;
   }
 }
