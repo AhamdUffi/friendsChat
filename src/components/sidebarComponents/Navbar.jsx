@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./Navbar.module.css";
 import { profil1 } from "../../assets";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase";
+import { AuthContext } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = ({ style }) => {
+  const { currentUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const logoutHandler = async () => {
+    try {
+      await signOut(auth);
+      navigate("/login");
+    } catch (error) {}
+  };
   return (
     <div className={`${style} ${styles.navbar}`}>
       <div
@@ -15,12 +27,15 @@ const Navbar = ({ style }) => {
           className={`${styles.profil} d-md-flex align-items-center gap-3 ms-1`}
         >
           <div>
-            <img src={profil1} alt="profile" />
-            <span>Ahmad Uffi</span>
+            <img src={currentUser.photoURL} alt="profile" />
+            <span>{currentUser.displayName}</span>
           </div>
 
-          <button className={`${styles.logout} border-0 ms-2 p-1 rounded-pill`}>
-            logOut
+          <button
+            className={`${styles.logout} border-0 ms-2 p-1 rounded-pill`}
+            onClick={logoutHandler}
+          >
+            LogOut
           </button>
         </div>
       </div>

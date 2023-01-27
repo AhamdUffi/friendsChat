@@ -12,9 +12,9 @@
 }
 
 .more {
-  width: 140px;
+  display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: baseline;
   flex: 1;
 }
 
