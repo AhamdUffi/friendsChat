@@ -44,11 +44,12 @@ const Register = () => {
             });
             // make document for user
             await setDoc(doc(db, "users", res.user.uid), {
+              uid: res.user.uid,
               displayName,
               photoURL: downloadURL,
               email,
             });
-            // make document for freinds
+            // make document for freinds chat
             await setDoc(doc(db, "userChat", res.user.uid), {});
             navigate("/login");
           });
@@ -79,7 +80,7 @@ const Register = () => {
           {err && <p>Something wrong</p>}
 
           <p>
-            Have a Account <Link to={"/register"}>Login</Link>
+            Have a Account <Link to={"/login"}>Login</Link>
           </p>
         </form>
       </div>

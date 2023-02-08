@@ -2,9 +2,9 @@ import React from "react";
 import styles from "./ChatProfile.module.css";
 import { profil1 } from "../../assets";
 
-const ChatProfile = ({ displayName, photoURL }) => {
+const ChatProfile = ({ displayName, photoURL, onClick }) => {
   return (
-    <div>
+    <div onClick={onClick}>
       <div className={`${styles.chat_profile} mt-1 p-3 d-flex `}>
         <img src={photoURL} alt="profil" />
         <div className={`${styles.chatField}`}>
