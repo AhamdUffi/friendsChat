@@ -4,6 +4,7 @@ import styles from "./NavbarChat.module.css";
 
 const NavbarChat = () => {
   const { data } = useContext(ChatContext);
+  console.log(data);
 
   return (
     <div

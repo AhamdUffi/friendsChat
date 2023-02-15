@@ -10,11 +10,7 @@ export const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     const loged = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setCurrentUser(user);
-      } else {
-        console.log("user not found");
-      }
+      setCurrentUser(user);
     });
     return () => {
       loged();

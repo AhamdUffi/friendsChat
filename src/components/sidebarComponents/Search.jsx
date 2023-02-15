@@ -1,6 +1,4 @@
-import React from "react";
 import styles from "./Search.module.css";
-import ChatProfile from "./ChatProfile";
 import {
   collection,
   query,
@@ -11,30 +9,35 @@ import {
   doc,
   serverTimestamp,
   updateDoc,
+  onSnapshot,
 } from "firebase/firestore";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { db } from "../../firebase";
-import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { ChatContext } from "../../context/ChatContext";
 
 function Search({ style }) {
   const [userName, setUserName] = useState("");
   const [users, setUsers] = useState([]);
-  const [result, setResult] = useState(false);
   const [err, setErr] = useState(false);
   const { currentUser } = useContext(AuthContext);
+  const { dispatch } = useContext(ChatContext);
+
+  // mengambil data secara realtime
 
   const search = async () => {
     setErr(false);
     // query to find a user
-    const citiesRef = collection(db, "users");
-    const q = query(citiesRef, where("displayName", "==", userName));
+    const usersRef = collection(db, "users");
+    const q = query(usersRef, where("displayName", "==", userName));
     const querySnapshot = await getDocs(q);
+
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
-      setUsers((prev) => [doc.data()]);
+      setUsers([doc.data()]);
     });
   };
+
   const searchHandler = async (e) => {
     e.preventDefault();
     search();
@@ -53,10 +56,12 @@ function Search({ style }) {
       }
     }
   };
+  console.log(" no select efected");
 
   // selected user
-  const selectedUser = async () => {
+  const selectedUser = async (x) => {
     // find index of users who found
+    console.log("select efected");
     const indexUser = users.findIndex((x) => {
       return x.displayName == userName;
     });
@@ -68,17 +73,14 @@ function Search({ style }) {
         ? currentUser.uid + user.uid
         : user.uid + currentUser.uid;
 
-    console.log(currentUser.uid);
-    console.log(user.uid);
-
     try {
       const res = await getDoc(doc(db, "chats", combineID));
+
       if (!res.exists()) {
         // create a Doc if no Exist
         await setDoc(doc(db, "chats", combineID), { massages: [] });
 
         // update and create messages in Doc
-
         await updateDoc(doc(db, "userChat", currentUser.uid), {
           [combineID + ".userInfo"]: {
             uid: user.uid,
@@ -87,7 +89,6 @@ function Search({ style }) {
           },
           [combineID + ".userDate"]: serverTimestamp(),
         });
-
         await updateDoc(doc(db, "userChat", user.uid), {
           [combineID + ".userInfo"]: {
             uid: currentUser.uid,
@@ -96,12 +97,26 @@ function Search({ style }) {
           },
           [combineID + ".userDate"]: serverTimestamp(),
         });
-        console.log("updated");
+
+        onSnapshot(doc(db, "userChat", currentUser.uid), (doc) => {
+          Object.entries(doc.data())?.map((data) => {
+            dispatch({ type: "CHANGE_USER", payload: data[1].userInfo });
+          });
+        });
+        setUsers(null);
+      } else {
+        onSnapshot(doc(db, "userChat", currentUser.uid), (doc) => {
+          Object.entries(doc.data())?.map((data) => {
+            if (data[1].userInfo.displayName == userName) {
+              dispatch({ type: "CHANGE_USER", payload: data[1].userInfo });
+            }
+          });
+        });
+        setUsers(null);
       }
     } catch (error) {}
-    setUsers(null);
-    setUserName("");
   };
+
   return (
     <div className={`${styles.search} ${style}  border-bottom `}>
       <div className={`d-flex ${styles.finding} mb-2`}>
@@ -123,7 +138,7 @@ function Search({ style }) {
       <div className={`${styles.result}`}>
         {users &&
           users.map((friend, index) => (
-            <div onClick={selectedUser} key={index}>
+            <div onClick={() => selectedUser()} key={index}>
               <div className={`${styles.chat_profile} mt-1 p-3 d-flex `}>
                 <img src={friend.photoURL} alt="profil" />
                 <div className={`${styles.chatField}`}>
@@ -133,6 +148,7 @@ function Search({ style }) {
               </div>
             </div>
           ))}
+
         {err && <p>No friend Found </p>}
       </div>
     </div>

@@ -14,6 +14,8 @@ const AllChat = () => {
   const { currentUser } = useContext(AuthContext);
   const { data, dispatch } = useContext(ChatContext);
 
+  // mendapatkan data dari userchat berdasarkan current user id sacara realtime dari firestore
+
   useEffect(() => {
     const getChats = () => {
       const unsub = onSnapshot(doc(db, "userChat", currentUser.uid), (doc) => {
@@ -24,7 +26,7 @@ const AllChat = () => {
       };
     };
     currentUser.uid && getChats();
-  }, [currentUser.uid]);
+  });
 
   const handleSelected = async (user) => {
     await dispatch({ type: "CHANGE_USER", payload: user });
@@ -32,15 +34,16 @@ const AllChat = () => {
 
   return (
     <div className={`${styles.allChat}`}>
-      {Object.entries(chats).map((chat, index) => (
-        <ChatProfile
-          key={index}
-          displayName={chat[1].userInfo.displayName}
-          photoURL={chat[1].userInfo.photoURL}
-          lastMassage={chat[1].lastMassage?.text}
-          onClick={() => handleSelected(chat[1].userInfo)}
-        />
-      ))}
+      {chats &&
+        Object.entries(chats)?.map((chat, index) => (
+          <ChatProfile
+            key={index}
+            displayName={chat[1].userInfo.displayName}
+            photoURL={chat[1].userInfo.photoURL}
+            lastMassage={chat[1].lastMassage?.text}
+            onClick={() => handleSelected(chat[1].userInfo)}
+          />
+        ))}
     </div>
   );
 };

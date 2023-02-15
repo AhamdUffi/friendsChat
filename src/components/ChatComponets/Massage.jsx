@@ -1,30 +1,27 @@
-import React from "react";
-import { useContext } from "react";
+import { doc, onSnapshot } from "firebase/firestore";
+import { useContext, useEffect, useState } from "react";
+import { ChatContext } from "../../context/ChatContext";
+import { db } from "../../firebase";
 import styles from "./Massage.module.css";
 import MainChat from "./MassageComponets/MainChat";
-import { doc, onSnapshot } from "firebase/firestore";
-import { useEffect, useState } from "react";
-import { db } from "../../firebase";
-import { ChatContext } from "../../context/ChatContext";
 
 const Massage = () => {
   const { data } = useContext(ChatContext);
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    const unSub = onSnapshot(doc(db, "chats", data.uid), (doc) => {
+    const unsub = onSnapshot(doc(db, "chats", data.chatsUID), (doc) => {
       doc.exists() && setMessages(doc.data().massages);
     });
-
     return () => {
-      unSub();
+      unsub();
     };
-  }, [data.uid]);
+  }, [data.chatsUID]);
 
   return (
     <div className={`${styles.massage}`}>
-      {messages?.map((m, index) => (
-        <Massage key={index} messages={m} />
+      {messages.map((message, index) => (
+        <MainChat messages={message} key={message.id} />
       ))}
     </div>
   );

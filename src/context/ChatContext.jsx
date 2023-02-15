@@ -1,6 +1,5 @@
 import { useReducer } from "react";
 import { useContext } from "react";
-import { useEffect } from "react";
 import { createContext } from "react";
 import { AuthContext } from "./AuthContext";
 
@@ -8,7 +7,7 @@ export const ChatContext = createContext();
 export const ChatContextProvider = ({ children }) => {
   const { currentUser } = useContext(AuthContext);
   const defaultValue = {
-    chatsUID: "",
+    chatsUID: "null",
     user: {},
   };
   const chatReducer = (state, action) => {
@@ -16,7 +15,7 @@ export const ChatContextProvider = ({ children }) => {
       case "CHANGE_USER":
         return {
           user: action.payload,
-          uid:
+          chatsUID:
             currentUser.uid > action.payload.uid
               ? currentUser.uid + action.payload.uid
               : action.payload.uid + currentUser.uid,
