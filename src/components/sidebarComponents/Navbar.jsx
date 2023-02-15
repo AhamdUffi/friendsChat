@@ -21,7 +21,7 @@ const Navbar = ({ style }) => {
         className={`${styles.container} d-flex p-2 justify-content-around align-items-center`}
       >
         <div className={styles.title}>
-          <h6>Super Chat</h6>
+          <h6>Friends Chat</h6>
         </div>
         <div
           className={`${styles.profil} d-md-flex align-items-center gap-3 ms-1`}
