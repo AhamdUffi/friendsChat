@@ -44,14 +44,8 @@ const Send = () => {
               date: Timestamp.now(),
             }),
           });
-          console.log(url);
         })
-        .catch((error) => {
-          // A full list of error codes is available at
-          // https://firebase.google.com/docs/storage/web/handle-errors
-          switch (error.code) {
-          }
-        });
+        .catch((error) => {});
     } else {
       await updateDoc(doc(db, "chats", data.chatsUID), {
         massages: arrayUnion({

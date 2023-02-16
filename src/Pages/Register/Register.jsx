@@ -7,13 +7,17 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { useNavigate, Link } from "react-router-dom";
+import Modal from "../../components/Modal/Modal";
 const Register = () => {
+  // loader handler
+  const [loader, setLoader] = useState(false);
   // error handler
   const [err, setErr] = useState(false);
   // navigate Handler
   const navigate = useNavigate();
   const submitHandler = async (e) => {
     e.preventDefault();
+    setLoader(true);
 
     const displayName = e.target[0].value;
     const email = e.target[1].value;
@@ -55,6 +59,7 @@ const Register = () => {
           });
         }
       );
+      setLoader(false);
     } catch (error) {
       setErr(true);
     }
@@ -65,6 +70,7 @@ const Register = () => {
       className={styles.register_container}
       style={{ backgroundImage: bgRegister }}
     >
+      {loader && <Modal />}
       <div className={styles.register}>
         <h1 className={styles.judul}>register</h1>
         <form onSubmit={submitHandler}>

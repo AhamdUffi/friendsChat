@@ -35,15 +35,17 @@ const AllChat = () => {
   return (
     <div className={`${styles.allChat}`}>
       {chats &&
-        Object.entries(chats)?.map((chat, index) => (
-          <ChatProfile
-            key={index}
-            displayName={chat[1].userInfo.displayName}
-            photoURL={chat[1].userInfo.photoURL}
-            lastMassage={chat[1].lastMassage?.text}
-            onClick={() => handleSelected(chat[1].userInfo)}
-          />
-        ))}
+        Object.entries(chats)
+          ?.sort((a, b) => b[1].userDate - a[1].userDate)
+          .map((chat, index) => (
+            <ChatProfile
+              key={index}
+              displayName={chat[1].userInfo.displayName}
+              photoURL={chat[1].userInfo.photoURL}
+              lastMassage={chat[1].lastMassage?.text}
+              onClick={() => handleSelected(chat[1].userInfo)}
+            />
+          ))}
     </div>
   );
 };
